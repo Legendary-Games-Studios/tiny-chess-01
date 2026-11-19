@@ -19,11 +19,21 @@ MAKEFUN_ENV_URL=http://127.0.0.1:8080 python3 main.py
 
 ## Strength
 
-Practice trials against the house gauntlet put it near **876 Elo**: it
-draws the `depth-2` and `depth-3` anchors and loses to `depth-4` and the
-node-limited engines. The final's practice floor is 1,154, so this is a
-valid entry that is not expected to place. A transposition table was
-tried and regressed the search to 0/6, so it is not included.
+Practice trials against the house gauntlet put it at **1,364 Elo** over
+the 6-game practice set (3.5/6): a win over `depth-2` and over
+`nodes-100k`, draws with `depth-3`, `depth-4` and `nodes-250k`, and a loss
+to `nodes-500k`. The final's practice floor is 1,154 and the house
+baseline runs ~1,325-1,365, so the entry is expected to reach the final
+but not to place in the top 20 of a large field.
+
+The first version of this engine scored 876 Elo despite searching 5-7
+plies, because the king piece-square tables applied the endgame term in
+every phase: `KE[k] - KW[k]` on top of the middlegame table already added
+made a king in the centre worth ~150cp more than a castled one, so the
+search eagerly walked the king out. Gating that term on "no queens left"
+rather than on material difference raised the measured score to 1,364. A
+transposition table was also tried and regressed the search to 0/6, so it
+is not included.
 
 ---
 
