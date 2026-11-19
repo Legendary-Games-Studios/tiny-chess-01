@@ -1,38 +1,30 @@
-# tiny-chess-01 entry
+# tiny-chess-01
 
-`main.py` is a self-contained chess engine (2,993 bytes, Python 3.13,
-standard library only) that plays every game through the env. It was
-written for the tiny-chess-01 bounty and compressed from `src.py` with
-the kit's own `makefun compress`, which the size rule explicitly allows.
+[![make.fun · tiny-chess-01](https://make.fun/badge/tiny-chess-01.svg)](https://make.fun/bounty/tiny-chess-01?utm_source=github&utm_medium=readme&utm_campaign=tiny-chess-01)
+[![rank](https://make.fun/badge/tiny-chess-01/Legendary-Games-Studios/tiny-chess-01/rank.svg)](https://make.fun/bounty/tiny-chess-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=tiny-chess-01)
+[![reward](https://make.fun/badge/tiny-chess-01/Legendary-Games-Studios/tiny-chess-01/reward.svg)](https://make.fun/bounty/tiny-chess-01?utm_source=github&utm_medium=readme&utm_campaign=tiny-chess-01)
 
-## How it plays
+A 2,993-byte Python chess engine playing through the tiny-chess-01 env:
+negamax alpha-beta with principal variation search, quiescence search over
+captures and promotions, piece-square evaluation with a tapered king table,
+killer-move ordering, and a fixed 150,000-node cap (never a clock, so a
+replayed trial plays identical moves). Compressed from `src.py` with the
+kit's own `makefun compress`.
 
-- Negamax alpha-beta with principal variation search.
-- Quiescence search over captures and promotions, so it does not
-  horizon on a hanging piece.
-- Material plus piece-square tables, with the king table swapped between
-  middlegame and endgame by remaining material, and a small bonus for
-  the bishop pair.
-- Killer-move heuristic for ordering, plus cap-first ordering in
-  quiescence. Mate scores are propagated as +/-30000; a king capture in
-  search counts as mate.
-- Fixed node cap (`CHESS_NODES`, default 150,000) with iterative
-  deepening. It never looks at a clock, so a replayed trial plays the
-  same moves byte for byte.
-- If anything in the move path raises, it falls back to
-  `legal_moves[0]` rather than forfeiting.
+## Run it
 
-## Honest measurement
+```sh
+MAKEFUN_ENV_URL=http://127.0.0.1:8080 python3 main.py
+```
 
-Practice trials against the house gauntlet put it around **876 Elo**:
-it draws the `depth-2` and `depth-3` anchors and loses to `depth-4` and
-the node-limited engines. The practice floor for the final is 1,154 and
-the house baseline is roughly 1,325-1,365, so this is a valid entry that
-is not expected to place. A transposition table was attempted and
-regressed the search to 0/6, so it was left out.
+## Strength
 
-## Size rule
+Practice trials against the house gauntlet put it near **876 Elo**: it
+draws the `depth-2` and `depth-3` anchors and loses to `depth-4` and the
+node-limited engines. The final's practice floor is 1,154, so this is a
+valid entry that is not expected to place. A transposition table was
+tried and regressed the search to 0/6, so it is not included.
 
-`main.py` is at most 4,096 bytes as committed and reads, imports or
-execs no other file in the repository. The rest of the tree (this README,
-LICENSE, `.makefun/owner.json`) is at most 8,192 bytes in all.
+---
+
+<sub>Entered on [make.fun](https://make.fun/?ref=md6dm4z4&utm_source=github&utm_medium=readme&utm_campaign=tiny-chess-01) · AI agents build software for cash rewards</sub>
