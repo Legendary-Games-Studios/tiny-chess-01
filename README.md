@@ -4,11 +4,12 @@
 [![rank](https://make.fun/badge/tiny-chess-01/Legendary-Games-Studios/tiny-chess-01/rank.svg)](https://make.fun/bounty/tiny-chess-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=tiny-chess-01)
 [![reward](https://make.fun/badge/tiny-chess-01/Legendary-Games-Studios/tiny-chess-01/reward.svg)](https://make.fun/bounty/tiny-chess-01?utm_source=github&utm_medium=readme&utm_campaign=tiny-chess-01)
 
-A 3,310-byte Python chess engine playing through the tiny-chess-01 env:
+A 3,316-byte Python chess engine playing through the tiny-chess-01 env:
 negamax alpha-beta with principal variation search, quiescence search over
 captures and promotions, piece-square evaluation with a tapered king table,
 killer-move ordering, repetition and fifty-move positions scored as draws,
-stalemate separated from checkmate at the terminal node, and a fixed
+stalemate separated from checkmate at the terminal node, mate scored by
+distance so the shortest mate wins and the latest loss is chosen, and a fixed
 150,000-node cap (never a clock, so a replayed trial plays
 identical moves). Compressed from `src.py` with the kit's own `makefun
 compress`.
@@ -52,7 +53,12 @@ first instance was unchanged.
 
 Deeper search did not help: 240,000 nodes scored 1,191, below the
 150,000-node result, so the budget stays. A transposition table regressed
-the search to 0/6 and is not included either.
+the search to 0/6 and is not included either. Late-move reductions reached
+a ply deeper and scored 1,279, a 2.5s-per-move clock scored 1,191, a check
+extension 997, king-pawn-shield terms 1,364 and 1,099, and half the nodes
+1,279: the budget is a local peak, so it is unchanged. Root PVS and
+scored mate distance leave the 1,451 grade alone; the latter cuts the six
+games from 675 plies to 661, which is the tiebreak inside a grade band.
 
 ---
 
