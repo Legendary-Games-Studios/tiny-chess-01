@@ -51,14 +51,12 @@ whether the side to move is actually in check (`atk`): stalemate is 0,
 mate is `-MATE`. Three draws on the second instance became wins, and the
 first instance was unchanged.
 
-Deeper search did not help: 240,000 nodes scored 1,191, below the
-150,000-node result, so the budget stays. A transposition table regressed
-the search to 0/6 and is not included either. Late-move reductions reached
-a ply deeper and scored 1,279, a 2.5s-per-move clock scored 1,191, a check
-extension 997, king-pawn-shield terms 1,364 and 1,099, and half the nodes
-1,279: the budget is a local peak, so it is unchanged. Root PVS and
-scored mate distance leave the 1,451 grade alone; the latter cuts the six
-games from 675 plies to 661, which is the tiebreak inside a grade band.
+Deeper search did not help: 240,000 nodes scored 1,191 and 100,000
+1,279, so 150,000 is a local peak. Late-move reductions (1,279), a 2.5s
+clock (1,191), a check extension (997), king-shield terms (1,364, 1,099)
+and a transposition table (0/6) all regressed and stay out. Root PVS is
+grade-neutral; scoring mate distance keeps 1,451 but cuts the six games
+from 675 plies to 661, the tiebreak inside a grade band.
 
 ---
 
