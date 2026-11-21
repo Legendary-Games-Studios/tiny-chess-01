@@ -50,7 +50,7 @@ check (`atk`): stalemate is 0, mate is `-MATE`. Three draws on the second
 instance became wins; the first was unchanged.
 
 Deeper search did not help: 100,000 scored 1,279, 175,000 1,279 and
-240,000 1,191, so 150,000 is a sharp local peak. Late-move reductions (1,279), a 2.5s clock (1,191), a check extension
+240,000 1,191, so 150,000 is the peak. Late-move reductions (1,279), a 2.5s clock (1,191), a check extension
 (997), king-shield terms (1,364, 1,099) and a transposition table (0/6)
 all regressed. Root PVS is grade-neutral; scored mate distance keeps 1,451 but cuts the
 six games from 675 plies to 661, the tiebreak inside a grade band.
